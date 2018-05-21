@@ -1,0 +1,40 @@
+<div class="contenedor-formulario" *ngIf="identificado && identificado.rol =='ROLE_ADMIN'">
+    <h1>{{tituloComponente}}</h1>
+    <form #formAlbum="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6">
+        <p>
+            <label>Numero</label>
+            <input type="text" #numero="ngModel" name="numero" [(ngModel)]="musica.numero" required class="form-control" />
+            <span *ngIf="!numero.valid && numero.touched"> 
+                                El numero es obligatorio
+                              </span>
+        </p>
+        <p>
+            <label>Nombre</label>
+            <input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="musica.nombre" required class="form-control" />
+            <span *ngIf="!nombre.valid && nombre.touched"> 
+                        El nombre es obligatorio
+                      </span>
+        </p>
+        <p>
+            <label>Duracion</label>
+            <input type="text" #duracion="ngModel" name="duracion" [(ngModel)]="musica.duracion" required class="form-control">
+            <span *ngIf="!duracion.valid && duracion.touched"> 
+                  La duracion es obligatoria
+                </span>
+        </p>
+
+
+        <div class="musica_for_edit" *ngIf="musica.file && musica.file!=null">
+            <audio controls>
+                <source src="{{url+'get/musica/'+musica.file}}" type="audio/mpeg">
+            </audio>
+            <img src="{{url+'get/musica/'+musica.file}}" alt="" width="100px">
+        </div>
+        <p>
+            <label for="">Sube el audio de la musica</label>
+            <input type="file" placeholder="Subir Tema Musical" class="form-control" (change)="fileChangeEvent($event)">
+        </p>
+
+        <input type="submit" value="Enviar Informacion" [disabled]="!formAlbum.form.valid" class="btn btn-success" />
+    </form>
+</div>

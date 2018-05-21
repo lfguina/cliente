@@ -1,0 +1,114 @@
+.actived {
+    border-bottom: 4px solid #84BD00;
+    padding-bottom: 4px;
+}
+
+.head-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.navigation {
+    text-align: center;
+    color: white;
+    background: #15151E;
+    height: 100%;
+}
+
+.navigation a {
+    color: #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    color: white;
+}
+
+.navigation .glyphicon {
+    font-size: 25px;
+    display: block;
+    width: 100%;
+}
+
+#user_logged {
+    background: 15151E;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #444;
+    width: 75%;
+    text-align: center;
+}
+
+#user_logged .user-image {
+    background: #eee;
+    border-radius: 100px;
+    height: 57px;
+    width: 57px;
+    margin: 0px auto;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#user_logged .user-image img {
+    width: 57px;
+}
+
+.btn-logout {
+    cursor: pointer;
+}
+
+#user_logged .glyphicon-log-out {
+    font-size: 19px;
+}
+
+.menu-item {
+    display: inline-block;
+    border-bottom: 2px solid #444;
+}
+
+.actived {
+    border-bottom: 4px solid #84bd00;
+    padding-bottom: 4px
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.central {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.mycontenedor {
+    background-color: #fff;
+    color: black;
+    /* height: 100% !important; */
+    margin: 0;
+    padding: 15px;
+}
+
+.desplazado {
+    /* background-color: #455a64; */
+    /* background-color: #E5E9ED; */
+    color: black;
+    margin: 0;
+    /* height: 100% !important; */
+    padding: 15px;
+    padding-bottom: 150px;
+}
+
+.contenedor-formulario {
+    /* background-color: #455a64; */
+    color: black;
+    margin: 0;
+    height: 100% !important;
+    padding: 15px;
+}

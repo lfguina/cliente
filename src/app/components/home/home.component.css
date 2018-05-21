@@ -1,0 +1,10 @@
+.jumbotron,
+.mycontenedor {
+    background-color: #455a64;
+    color: white;
+    height: 100% !important;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    padding-top: 18%;
+}

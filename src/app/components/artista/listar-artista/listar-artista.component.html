@@ -1,0 +1,54 @@
+<div class="head-page mycontenedor" *ngIf="identificado">
+    <h1>{{titulo}}</h1>
+    <a [routerLink]="['/crear-artista']" *ngIf="identificado && identificado.rol == 'ROLE_ADMIN'" class="btn btn-default">
+      Añadir artista
+    </a>
+
+
+    <ul class="pagination pull-right">
+        <li><a [routerLink]="['/artistas', prevPage]">&laquo;</a></li>
+        <li><a [routerLink]="['/artistas', nextPage]">&raquo;</a></li>
+
+    </ul>
+    <div class="clearfix"></div>
+
+    <!-- <h2>Listado de Artistas</h2> -->
+    <ul class="artist-list" *ngIf="identificado">
+        <li *ngFor="let artista of artistas" class="col-lg-3 artist-item">
+
+
+            <div class="artist-image">
+                <img src="{{url+'imagen/artista/'+artista.imagen}}" alt="">
+            </div>
+            <div class="artist-name">
+                <a [routerLink]="['/artista',artista._id]">{{artista.nombre}}</a>
+                <!-- <div class="buttons" *ngIf="identificado.rol == 'ROLE_ADMIN'">
+                    <a [routerLink]="['/editar-artista',artista._id]" class="btn btn-sm btn-warning">Editar</a>
+                    <a (click)="eliminarRegistroConfirmar(artista._id)" class="btn btn-sm btn-danger">Borrar</a>
+                </div>
+                <div class="seguro" *ngIf="confirmado == artista._id">
+                    <a (click)="eliminarSeguro(artista._id)" class="btn btn-sm btn-danger">Borrar</a>
+                    <a (click)="cancelarEliminar(artista._id)" class="btn btn-sm btn-primary">Cancelar</a>
+                </div> -->
+            </div>
+
+            <!-- <div id="main">
+                    <div id="image">
+                        <img src="{{url+'imagen/artista/'+artista.imagen}}" />
+                        <div id="wave"></div>
+                        <div id="wave2"></div>
+                    </div>
+
+                    <div id="info">
+                        <div id="name"> <a style="font-size: 1.4em; color:#fff" [routerLink]="['/artista',artista._id]">{{artista.nombre}}</a></div>
+
+                    </div>
+                </div> -->
+
+
+
+
+        </li>
+    </ul>
+
+</div>
