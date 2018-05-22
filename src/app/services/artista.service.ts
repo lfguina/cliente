@@ -91,4 +91,25 @@ export class ArtistaService {
 
 
   }
+
+
+
+  getTodosLosArtistas(token){
+    let headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization' : token
+	});
+	
+    
+    let options = new RequestOptions({headers});
+    return this._http.get(this.url+'all/artistas/', options)
+					.pipe(
+						map(
+							res => res.json()
+							
+						)
+					);
+
+
+  }
 }

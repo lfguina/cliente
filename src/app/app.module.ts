@@ -25,6 +25,8 @@ import { AddMusicaComponent } from './components/musica/add-musica/add-musica.co
 import { MusicaService } from './services/musica.service';
 import { EditMusicaComponent } from './components/musica/edit-musica/edit-musica.component';
 import { PlayerComponent } from './components/player/player.component';
+import { AllBuscarComponent } from './components/buscar/all-buscar/all-buscar.component';
+
 
 
 //router
@@ -42,14 +44,15 @@ import { PlayerComponent } from './components/player/player.component';
     DetalleAlbumComponent,
     AddMusicaComponent,
     EditMusicaComponent,
-    PlayerComponent
+    PlayerComponent,
+    AllBuscarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routing, 
-    DataTablesModule
+    DataTablesModule,
     
 
     
@@ -57,4 +60,6 @@ import { PlayerComponent } from './components/player/player.component';
   providers: [UsuarioService, ToasterService, appRoutingProviders, ArtistaService, UploadService, AlbumService, MusicaService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}

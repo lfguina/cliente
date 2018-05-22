@@ -77,11 +77,11 @@
                                         <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Canciones Favoritas</a>
                                     </li>
                                     <li class="nav-item" *ngIf="identificado.rol == 'ROLE_ADMIN'">
-                                        <a [routerLink]="['/crear-album', artista._id]" *ngIf="identificado.rol == 'ROLE_ADMIN'" class="nav-link btn btn-sm btn-default" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Agregar Album</a>
+                                        <a [routerLink]="['/crear-album', artista._id]" *ngIf="identificado.rol == 'ROLE_ADMIN'" class="nav-link btn btn-sm btn-default">Agregar Album</a>
 
                                     </li>
                                     <li class="nav-item" *ngIf="identificado.rol == 'ROLE_ADMIN'">
-                                        <a class="nav-link btn btn-sm btn-warning" [routerLink]="['/editar-artista',artista._id]" *ngIf="identificado.rol == 'ROLE_ADMIN'" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Editar</a>
+                                        <a class="nav-link btn btn-sm btn-warning" [routerLink]="['/editar-artista',artista._id]" *ngIf="identificado.rol == 'ROLE_ADMIN'">Editar</a>
 
                                     </li>
                                     <li class="nav-item" *ngIf="identificado.rol == 'ROLE_ADMIN'">
@@ -103,12 +103,19 @@
                                                         <p>
                                                             <a [routerLink]="['/album',album._id]">{{album.titulo}}</a>
                                                         </p>
-                                                        <p>
-                                                            <a [routerLink]="['/artista',album.artista._id]">{{album.artista.nombre}}</a>
-                                                        </p>
+                                                        <div>
+
+                                                            <div *ngFor="let artista of album.artista" style="display: inline;">
+                                                                <a [routerLink]="['/artista',artista._id]">|| {{artista.nombre}} ||</a>
+
+
+                                                            </div>
+
+
+                                                        </div>
 
                                                         <div class="buttons" *ngIf="identificado.rol == 'ROLE_ADMIN'">
-                                                            <a [routerLink]="['/editar-album',album._id]" class="btn btn-sm btn-warning">Editar</a>
+                                                            <a [routerLink]="['/editar-album',album._id, artista._id]" class="btn btn-sm btn-warning">Editar</a>
                                                             <a (click)="eliminarRegistroConfirmar(album._id)" class="btn btn-sm btn-danger">Borrar</a>
                                                         </div>
                                                         <div class="seguro" *ngIf="confirmado == album._id">

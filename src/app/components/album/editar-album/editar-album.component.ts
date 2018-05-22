@@ -8,6 +8,9 @@ import { UploadService } from '../../../services/upload.service';
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import { ToasterService } from '../../../services/toaster.service';
 import { AlbumService } from '../../../services/album.service';
+import { ArtistaService } from '../../../services/artista.service';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-editar-artista',
@@ -21,13 +24,17 @@ export class EditarAlbumComponent implements OnInit {
 	public identificado;
 	public token;
   public url;
+  public artistas: Artista [];
+  public  artistas_inicial_clave:any[]=[];
+  public artistasRespaldo: any[];
   constructor (
 		private _route: ActivatedRoute,
 		private _router : Router,
 		private _userService: UsuarioService,
     private  toastService:ToasterService,
     private _albumService:AlbumService,
-    private _uploadService: UploadService
+    private _uploadService: UploadService,
+    private _artistService: ArtistaService
 
 	){
 		this.tituloComponente = 'Editar Album';
@@ -41,6 +48,10 @@ export class EditarAlbumComponent implements OnInit {
     console.log('add album cargado');
     //llamar a la api para sacar un album en base a su id
     this.getAlbum();
+
+    this.obtenerArtistas();
+    
+    
    
   }
 getAlbum(){
@@ -53,6 +64,13 @@ getAlbum(){
           this._router.navigate(['/']);
         }else{
           this.album= response.album;
+           
+            for (var i = 0; i < response.album.artista.length; i++) {
+              this.artistas_inicial_clave.push(response.album.artista[i]._id);
+            }//fin del for
+            console.log(this.artistas_inicial_clave);
+            //this.artistasRespaldo= this.album.artista;
+          //this.album.artista= '';
         }
 
       },
@@ -68,10 +86,25 @@ getAlbum(){
   });
 }
   onSubmit(){
+    let artista_actual;
+    this._route.params.subscribe(params=>{
+      artista_actual=params['artista_id']
+    });
+
+    if (!this.album.artista) {
+      this.album.artista= this.artistas_inicial_clave;
+    }else{
+      
+    this.album.artista.push(artista_actual);
+
+    }
+
+
     let album_id;
     this._route.params.subscribe(params=>{
       album_id=params['id']
     });
+    
     
     //peticion
     this._albumService.editAlbum(this.token, album_id,this.album)
@@ -87,14 +120,14 @@ getAlbum(){
             this.toastService.Success('Actualizado correctamente','Correcto');
             if (!this.filesToUpload){
               //no puso imagen, redirigir
-             this._router.navigate(['artista',response.album.artista]);
+             this._router.navigate(['artista',artista_actual]);
             }else{
                //aki subir imagen
                this._uploadService.makeFileRequest(this.url+'upload/album/'+album_id,[],this.filesToUpload,this.token,'imagen' )
                .then(
                  (result)=>{
                    this.album.imagen= result['album'].imagen;
-                     this._router.navigate(['artista',response.album.artista]);
+                     this._router.navigate(['artista',artista_actual]);
                  },
                  (error)=>{
                    alert('error');
@@ -115,6 +148,19 @@ getAlbum(){
         }
       );
 
+
+    
+    
+
+
+    
+
+
+
+      
+
+      
+
   }
   public filesToUpload: Array<File>;
 
@@ -127,7 +173,44 @@ getAlbum(){
 
 
 
+  obtenerArtistas(){
+    let artista_actual;
+    this._route.params.subscribe(params=>{
+      artista_actual=params['artista_id']
+    });
+    
+    this._artistService.getTodosLosArtistas(this.token)
+        .subscribe(response=>{  
+          if (!response.artistas){
+          }else{
+            this.artistas= response.artistas;
+            for (var i = 0; i < this.artistas.length; i++) {
+              //comparo con el response, porque el modelo no tiene ._id, como esta ordenado ok..
+              // for (var j = 0; j<this.artistas_inicial_clave.length; j++){
+              //   if (response.artistas[i]._id == this.artistas_inicial_clave[j]){
+              //     this.artistas.splice(i,1);
 
+              //     break;
+              //   }
+              // }
+              if (response.artistas[i]._id == artista_actual){
+                this.artistas.splice(i,1);
+                this.album.artista= '';
+                break;
+              }
+             
+             
+            }//fin del for
+
+          }
+        },
+      error=>{
+        this.toastService.Info('Error en la peticion','Error!');
+        this._router.navigate(['/']);
+      }
+    );
+
+  }
 
 
 

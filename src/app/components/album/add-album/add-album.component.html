@@ -23,7 +23,19 @@
                 El Año es obligatorio
               </span>
         </p>
+        <p>
+            <label>Artista Adicional</label>
 
+            <select multiple name="artista" #artista="ngModel" [(ngModel)]="album.artista" class="form-control">
+                    <option [ngValue]="null" disabled>Escoja un artista adicional</option>
+
+
+                <option *ngFor="let art of artistas" [ngValue]="art._id" >
+                        {{art.nombre}}
+                    
+                </option>
+            </select>
+        </p>
 
         <div class="album_for_edit" *ngIf="album.imagen && album.imagen!=null">
             <img src="{{url+'imagen/album/'+album.imagen}}" alt="" width="100px">

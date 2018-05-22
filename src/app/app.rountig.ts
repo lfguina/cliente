@@ -22,7 +22,7 @@ const appRoutes: Routes = [
 	{path:'editar-artista/:id',component:EditarArtistaComponent},
 	{path:'artista/:id',component:DetalleArtistaComponent},
 	{path:'crear-album/:artista_id',component:AddAlbumComponent},
-	{path:'editar-album/:id',component:EditarAlbumComponent},
+	{path:'editar-album/:id/:artista_id',component:EditarAlbumComponent},
 	{path:'album/:id',component:DetalleAlbumComponent},
 	{path:'crear-musica/:album_id',component:AddMusicaComponent},
 	{path:'editar-musica/:id',component:EditMusicaComponent},

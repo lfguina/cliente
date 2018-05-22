@@ -5,7 +5,7 @@ export class Album {
 		public descripcion: string,
 		public year: number,
 		public imagen: string,
-		public artista: string
+		public artista: any
 	){}
 	
 }
