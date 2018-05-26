@@ -13,7 +13,7 @@
     <div class="clearfix"></div>
 
     <!-- <h2>Listado de Artistas</h2> -->
-    <ul class="artist-list" *ngIf="identificado">
+    <!-- <ul class="artist-list" *ngIf="identificado">
         <li *ngFor="let artista of artistas" class="col-lg-3 artist-item">
 
 
@@ -22,33 +22,42 @@
             </div>
             <div class="artist-name">
                 <a [routerLink]="['/artista',artista._id]">{{artista.nombre}}</a>
-                <!-- <div class="buttons" *ngIf="identificado.rol == 'ROLE_ADMIN'">
-                    <a [routerLink]="['/editar-artista',artista._id]" class="btn btn-sm btn-warning">Editar</a>
-                    <a (click)="eliminarRegistroConfirmar(artista._id)" class="btn btn-sm btn-danger">Borrar</a>
-                </div>
-                <div class="seguro" *ngIf="confirmado == artista._id">
-                    <a (click)="eliminarSeguro(artista._id)" class="btn btn-sm btn-danger">Borrar</a>
-                    <a (click)="cancelarEliminar(artista._id)" class="btn btn-sm btn-primary">Cancelar</a>
-                </div> -->
+
             </div>
 
-            <!-- <div id="main">
-                    <div id="image">
-                        <img src="{{url+'imagen/artista/'+artista.imagen}}" />
-                        <div id="wave"></div>
-                        <div id="wave2"></div>
-                    </div>
-
-                    <div id="info">
-                        <div id="name"> <a style="font-size: 1.4em; color:#fff" [routerLink]="['/artista',artista._id]">{{artista.nombre}}</a></div>
-
-                    </div>
-                </div> -->
 
 
 
 
         </li>
-    </ul>
+    </ul> -->
 
-</div>
+    <div class="row">
+        <div class="col-md-3" *ngFor="let artista of artistas">
+            <div class="our-team">
+                <div class="pic">
+                    <img src="{{url+'imagen/artista/'+artista.imagen}}" class="imagen" style="height: 120px" *ngIf="artista.imagen!='null'">
+                    <img src="{{url+'imagen/artista/defecto.jpg'}}" class="imagen" style="height: 120px" *ngIf="artista.imagen=='null'">
+                </div>
+                <div class="team-content">
+                    <h3 class="title"> <a [routerLink]="['/artista',artista._id]" class="title">{{artista.nombre}}</a></h3>
+                    <span class="post"> {{artista.descripcion}}</span>
+                </div>
+                <ul class="social">
+                    <li>
+                        <a href="#" class="fa fa-facebook"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fa fa-twitter"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fa fa-google-plus"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fa fa-linkedin"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>

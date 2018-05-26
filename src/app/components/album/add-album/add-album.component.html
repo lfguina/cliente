@@ -1,6 +1,7 @@
 <div class="desplazado" *ngIf="identificado && identificado.rol =='ROLE_ADMIN'">
     <h1>{{tituloComponente}}</h1>
-    <form #formAlbum="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6">
+    <form #formAlbum="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" style="padding-bottom: 200px">
+
         <p>
             <label>Titulo</label>
             <input type="text" #titulo="ngModel" name="titulo" [(ngModel)]="album.titulo" required class="form-control" />
@@ -24,17 +25,39 @@
               </span>
         </p>
         <p>
+            <label for="">Album sin artista adicional</label>
+            <input type="checkbox" name="activado" [checked]="activado" style="height: 15px; width: 15px; display: inline;margin-left: 10px" (click)="desactivar()">
+
+
+        </p>
+        <p>
             <label>Artista Adicional</label>
 
-            <select multiple name="artista" #artista="ngModel" [(ngModel)]="album.artista" class="form-control">
-                    <option [ngValue]="null" disabled>Escoja un artista adicional</option>
+            <select multiple name="artista" #artista="ngModel" [(ngModel)]="album.artista" class="form-control" [disabled]='activado'>
+                    <option [ngValue]=null disabled>Seleccione un artista</option>
 
 
-                <option *ngFor="let art of artistas" [ngValue]="art._id" >
+                <option *ngFor="let art of artistas; let i = index" [ngValue]="art._id" [ngClass]="{'seleccionado' : artistas_inicial_clave.includes(art._id)}" >
                         {{art.nombre}}
                     
                 </option>
+               
             </select>
+        </p>
+
+
+        <p>
+            <label>Generos Musicales</label>
+
+            <select multiple name="categoria" #categoria="ngModel" [(ngModel)]="album.categoria" class="form-control">
+                        <option [ngValue]="null" disabled >Escoje un genero</option>
+    
+    
+                    <option *ngFor="let cat of categorias" [ngValue]="cat._id" >
+                            {{cat.nombre}}
+                        
+                    </option>
+                </select>
         </p>
 
         <div class="album_for_edit" *ngIf="album.imagen && album.imagen!=null">

@@ -61,6 +61,7 @@ export class DetalleAlbumComponent implements OnInit {
                     this.toastService.Info('Album sin canciones','Sin Album!');
                   }else{
                     this.musicas=response.musicas;
+                    console.log('esto tengo de musica', this.musicas);
                   }
 
                 },
@@ -132,7 +133,7 @@ export class DetalleAlbumComponent implements OnInit {
     (document.getElementById("player") as any ).play();
 
     document.getElementById('play-song-title').innerHTML = musica.nombre;
-    document.getElementById('play-song-artist').innerHTML = musica.album.artista.nombre;
+    document.getElementById('play-song-artist').innerHTML = musica.album.titulo;
     document.getElementById('play-image-album').setAttribute('src',image_path);
     
 

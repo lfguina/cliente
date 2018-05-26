@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {GLOBAL} from '../../../services/global';
-import { UsuarioService } from '../../../services/usuario.service';
-import { Artista } from '../../../models/artista';
-import { Album } from '../../../models/album';
+import {GLOBAL} from '../../../../../services/global';
+import { UsuarioService } from '../../../../../services/usuario.service';
+import { Artista } from '../../../../../models/artista';
+import { Album } from '../../../../../models/album';
 
 import {Router, ActivatedRoute, Params} from "@angular/router";
-import { ArtistaService } from '../../../services/artista.service';
-import { ToasterService } from '../../../services/toaster.service';
-import { AlbumService } from '../../../services/album.service';
-import { DataService } from '../../../services/daata.service';
+import { ArtistaService } from '../../../../../services/artista.service';
+import { ToasterService } from '../../../../../services/toaster.service';
+import { AlbumService } from '../../../../../services/album.service';
+import { DataService } from '../../../../../services/daata.service';
 
 
 @Component({
   selector: 'app-editar-artista',
-  templateUrl: './detalle-artista.component.html',
+  templateUrl: './ha-listar-albumes.component.html',
   
 })
-export class DetalleArtistaComponent implements OnInit {
+export class HaListarAlbumesComponent implements OnInit {
   public titulo: string;
 	public artista: Artista
 	public identificado;
@@ -40,9 +40,7 @@ export class DetalleArtistaComponent implements OnInit {
     this.artista = new Artista('','','');
 
     this.data.currentIdUrl.subscribe(idUrl => this.id_Url = idUrl);
-    this._route.params.subscribe(params=>{
-      this.data.changeIdUrl(params['id']);
-    });
+    
 
   }
   ngOnInit() {
@@ -51,8 +49,7 @@ export class DetalleArtistaComponent implements OnInit {
     this.getArtista();
   }
   getArtista(){
-    this._route.params.forEach((params:Params)=>{
-      let id = params['id'];
+    let id = this.id_Url;
       this._artistService.getArtista(this.token,id)
         .subscribe(response=>{
          
@@ -68,6 +65,7 @@ export class DetalleArtistaComponent implements OnInit {
                     this.toastService.Info('Este artista no tiene album','Sin Album!');
                   }else{
                     this.albums=response.albums;
+                  
                   }
 
 
@@ -90,9 +88,8 @@ export class DetalleArtistaComponent implements OnInit {
       }
     );
 
+    console.log('me apaso' , this.id_Url);
 
-
-    });
   }
 
   public confirmado;
@@ -122,30 +119,7 @@ export class DetalleArtistaComponent implements OnInit {
 
   }
   
-  eliminarSeguroArtista(id){
-    if(confirm("Esta seguro de eliminar artista")){
-      this._artistService.deleteArtista(this.token, id)
-			.subscribe(
-				response=>{
-         
-					if (!response.artista){
-						
-						alert('error');
-					}
-          this._router.navigate(['/artistas/1']);
-
-				},
-			error=>{
-				let errorMessage= <any>error;
-				if (errorMessage!=null) var body = JSON.parse(errorMessage._body);
-				this.toastService.Error(body.message,'Error');
-			}
-			);
-
-    }
-    
-
-	}
+  
 	cancelarEliminar(){
 		this.confirmado=null;
 	}

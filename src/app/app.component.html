@@ -5,15 +5,20 @@
         </a>
     </h1>
     <nav id="navigation">
-        <a href="#" class="menu-item">
+        <a class="menu-item">
+            <!-- <i class="fa fa-search" aria-hidden="true"></i> Buscar -->
             Buscar
+        </a>
+        <a [routerLink]="['/generos']" class="menu-item" [routerLinkActive]="['actived']">
+            Generos
         </a>
 
         <a [routerLink]="['/artistas',1]" class="menu-item" [routerLinkActive]="['actived']">
             Artistas
         </a>
-        <a href="#" class="menu-item">
-                Me
+
+        <a class="menu-item">
+            Me gusta
             </a>
 
     </nav>

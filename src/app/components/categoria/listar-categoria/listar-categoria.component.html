@@ -1,0 +1,13 @@
+<h1 style="text-align: center; font-size: 2.5em; " class="mt-4"> Generos Disponibles</h1>
+<div class="row  " style="margin: 0 0px;  margin-top: 50px;">
+    <div class="col-md-3 mb-5 sombra-curva item tres " *ngFor="let categoria of categorias; let i = index">
+        <div class="card text-white bg-success mb-3 " style="max-width: 35rem; height: 122px;" [class]="estilosCategorias[i]">
+            <div class="card-header" style="text-align: center;">{{categoria.nombre}}</div>
+            <div class="card-body">
+                <h5 class="card-title">Descripcion</h5>
+                <p class="card-text" (click)='redireccionar(categoria._id)'>{{categoria.descripcion}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

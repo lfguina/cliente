@@ -26,6 +26,18 @@ import { MusicaService } from './services/musica.service';
 import { EditMusicaComponent } from './components/musica/edit-musica/edit-musica.component';
 import { PlayerComponent } from './components/player/player.component';
 import { AllBuscarComponent } from './components/buscar/all-buscar/all-buscar.component';
+import { ListarCategoriaComponent } from './components/categoria/listar-categoria/listar-categoria.component';
+import { AddCategoriaComponent } from './components/categoria/add-categoria/add-categoria.component';
+import { EditarCategoriaComponent } from './components/categoria/editar-categoria/editar-categoria.component';
+import { DetalleCategoriaComponent } from './components/categoria/detalle-categoria/detalle-categoria.component';
+import { CategoriaService } from './services/categoria.service';
+import { HcListarAlbumesComponent } from './components/categoria/detalle-categoria/hijas/hc-listar-albumes/hc-listar-albumes.component';
+import { HcListarCancionesComponent } from './components/categoria/detalle-categoria/hijas/hc-listar-canciones/hc-listar-canciones.component';
+import { HcListarArtistasComponent } from './components/categoria/detalle-categoria/hijas/hc-listar-artistas/hc-listar-artistas.component';
+import { DataService } from './services/daata.service';
+import { HaListarAlbumesComponent } from './components/artista/detalle-artista/hijas/ha-listar-albumes/ha-listar-albumes.component';
+import { HaListarCancionesComponent } from './components/artista/detalle-artista/hijas/ha-listar-canciones/ha-listar-canciones.component';
+import { HaListarCancionesFavoritasComponent } from './components/artista/detalle-artista/hijas/ha-listar-canciones-favoritas/ha-listar-canciones-favoritas.component';
 
 
 
@@ -45,7 +57,17 @@ import { AllBuscarComponent } from './components/buscar/all-buscar/all-buscar.co
     AddMusicaComponent,
     EditMusicaComponent,
     PlayerComponent,
-    AllBuscarComponent
+    AllBuscarComponent,
+    ListarCategoriaComponent,
+    AddCategoriaComponent,
+    EditarCategoriaComponent,
+    DetalleCategoriaComponent,
+    HcListarAlbumesComponent,
+    HcListarCancionesComponent,
+    HcListarArtistasComponent,
+    HaListarAlbumesComponent,
+    HaListarCancionesComponent,
+    HaListarCancionesFavoritasComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +79,7 @@ import { AllBuscarComponent } from './components/buscar/all-buscar/all-buscar.co
 
     
   ],
-  providers: [UsuarioService, ToasterService, appRoutingProviders, ArtistaService, UploadService, AlbumService, MusicaService],
+  providers: [UsuarioService, ToasterService, appRoutingProviders, ArtistaService, UploadService, AlbumService, MusicaService,CategoriaService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

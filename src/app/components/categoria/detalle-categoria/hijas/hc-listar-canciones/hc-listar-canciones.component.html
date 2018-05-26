@@ -1,0 +1,16 @@
+<div id="gallery-songs" *ngIf="musicas" style="padding-bottom: 200px">
+    <ul id="songs-lists">
+        <li *ngFor="let musica of musicas" class="song-item">
+            <div class="title">
+                <a class="btn btn-success" (click)="startPlayer(musica)">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </a>
+                {{musica.numero +'. '+ musica.nombre +' - '+musica.duracion }} \ <span (click)="meGusta(musica)" class="fa fa-heart-o fa-2x corazon" aria-hidden="true" style="float: right"> </span>
+
+
+                <div class="clearfix"></div>
+            </div>
+
+        </li>
+    </ul>
+</div>

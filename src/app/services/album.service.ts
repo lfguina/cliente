@@ -53,6 +53,17 @@ export class AlbumService {
 
     }
 
+    getAlbumCategoria(token, id){
+      let headers = new Headers({
+    'Content-Type': 'application/json',
+    'Authorization' : token
+      });
+      let options = new RequestOptions({headers});
+      return this._http.get(this.url+'album/categoria/'+id, options)
+      .pipe(map(res => res.json()));
+
+  }
+
 	addAlbum(token, album: Album){
 
 		let params = JSON.stringify(album);

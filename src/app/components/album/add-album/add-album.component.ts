@@ -3,12 +3,15 @@ import {GLOBAL} from '../../../services/global';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Artista } from '../../../models/artista';
 import { Album } from '../../../models/album';
+import { Categoria } from '../../../models/categoria';
+
 import { UploadService } from '../../../services/upload.service';
 
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import { ArtistaService } from '../../../services/artista.service';
 import { ToasterService } from '../../../services/toaster.service';
 import { AlbumService } from '../../../services/album.service';
+import { CategoriaService } from '../../../services/categoria.service';
 declare var $:any;
 
 
@@ -28,7 +31,11 @@ export class AddAlbumComponent implements OnInit {
 	public token;
   public url;
   public artistas: Artista [];
+  public categorias: Categoria [];
   public artista_id;
+  public activado:boolean;
+  public  artistas_inicial_clave:any[]=[];
+
 
   
   constructor (
@@ -36,6 +43,7 @@ export class AddAlbumComponent implements OnInit {
 		private _router : Router,
 		private _userService: UsuarioService,
     private _artistService: ArtistaService,
+    private _categoriaService: CategoriaService,
     private  toastService:ToasterService,
     private _albumService:AlbumService,
     private _uploadService: UploadService
@@ -46,15 +54,19 @@ export class AddAlbumComponent implements OnInit {
 		this.identificado = this._userService.getIdentificado();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-    this.album = new Album('','',2018,'','');
+    this.album = new Album('','',2018,'','','');
     
  
 
   }
+  desactivar(){
+    this.activado= !this.activado;
+   }
   ngOnInit() {
     console.log('add album cargado');
     this.comprobar();
     this.obtenerArtistas();
+    this.obtenerCategorias();
     
     
    
@@ -63,7 +75,6 @@ export class AddAlbumComponent implements OnInit {
   obtenerArtistas(){
     this._route.params.subscribe(params=>{
       this.artista_id=params['artista_id'];
-      //eliminar el artista propio
       
     });
     this._artistService.getTodosLosArtistas(this.token)
@@ -90,6 +101,24 @@ export class AddAlbumComponent implements OnInit {
     );
 
   }
+
+  obtenerCategorias(){
+    
+    this._categoriaService.getTodosLasCategorias(this.token)
+        .subscribe(response=>{  
+          if (response.categorias)
+            this.categorias= response.categorias;
+        },
+      error=>{
+        this.toastService.Info('Error en la peticion','Error!');
+        this._router.navigate(['/']);
+      }
+    );
+
+  }
+
+
+
   comprobar(){
     this._route.params.subscribe(params=>{
       this.artista_id=params['artista_id'];
@@ -116,9 +145,7 @@ export class AddAlbumComponent implements OnInit {
   }
 
 
-  compareByOptionId(idFist, idSecond) {
-    return idFist && idSecond && idFist._id == idSecond._id;
- }
+  
 
   onSubmit(){
     let artista_id;
@@ -126,14 +153,23 @@ export class AddAlbumComponent implements OnInit {
       artista_id=params['artista_id']
     });
      let acu: any[] = [];
-     if (!this.album.artista)
+     
+
+     if (this.activado){
+      acu.push(artista_id);
+
+     }else{
+      if (!this.album.artista)
      acu.push(artista_id);
      else {
       acu = this.album.artista;
       acu.unshift(artista_id);
      
      }
+     }
      this.album.artista = acu;
+
+    
     //peticion
     this._albumService.addAlbum(this.token, this.album)
       .subscribe(

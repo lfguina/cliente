@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-3" *ngFor="let artista of artistas">
+        <div class="our-team">
+            <div class="pic">
+                <img src="{{url+'imagen/artista/'+artista.imagen}}" />
+            </div>
+            <h3 class="title"> {{artista.nombre}}</h3>
+            <span class="post">{{artista.descripcion}}</span>
+
+        </div>
+
+
+    </div>
+
+</div>

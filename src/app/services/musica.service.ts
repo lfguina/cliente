@@ -87,6 +87,18 @@ export class MusicaService {
     return this._http.put(this.url+'musica/'+id, params, {headers:  headers})
                 .pipe(map(res => res.json()));
 }
+
+
+getMusicaAlbum(token, id){
+  let headers = new Headers({
+'Content-Type': 'application/json',
+'Authorization' : token
+  });
+  let options = new RequestOptions({headers});
+  return this._http.get(this.url+'musica/album/'+id, options)
+  .pipe(map(res => res.json()));
+
+}
   
   
 

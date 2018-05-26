@@ -1,0 +1,27 @@
+<div id="gallery-albums" *ngIf="albums">
+    <ul class="album-list">
+        <li *ngFor="let album of albums" class="col-lg-4 album-item">
+            <div class="album-image">
+                <img src="{{url+'imagen/album/'+album.imagen}}" alt="">
+            </div>
+            <div class="album-name">
+                <p>
+                    <a [routerLink]="['/album',album._id]">{{album.titulo}}{{album.artista.nombre}}</a>
+                </p>
+                <div>
+
+                    <div *ngFor="let artista of album.artista" style="display: inline;">
+                        <a [routerLink]="['/artista',artista._id]">|| {{artista.nombre}} ||</a>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </li>
+    </ul>
+</div>

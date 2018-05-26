@@ -12,9 +12,11 @@
         {{musica.nombre}}
     </span> |
     <span id="play-song-artist">
-        <span *ngIf="musica.album.artista">
-            {{musica.album.artista.nombre}}
+        <span *ngIf="musica.album.titulo">
+            {{musica.album.titulo}}
         </span>
+
+
     </span>
     <audio controls id="player">
         <source id="mp3-source" src="{{url+'get/musica/'+musica.file}}" type="audio/mpeg">

@@ -112,3 +112,63 @@
     height: 100% !important;
     padding: 15px;
 }
+
+
+/* sombras ttips*/
+
+.sombra-curva {
+    color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+.sombra-curva:after {
+    content: "";
+    width: 90%;
+    height: 5%;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    border-radius: 50%;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.item {
+    color: #fff;
+    position: relative;
+    transition: 1;
+}
+
+.item:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    transition: all 0.3s;
+}
+
+.item:hover:before {
+    width: 100%;
+    transform: scale(1, 1.1)
+}
+
+.tres:hover {
+    transform: scale(1, 1.05);
+    cursor: pointer;
+}
+
+.seleccionado {
+    background: #c8c8c8;
+}
+
+.corazon {
+    cursor: pointer;
+}
+
+.corazon:hover {
+    transform: scale(1.3)
+}
